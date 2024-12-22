@@ -75,29 +75,75 @@ public class secretaire {
 	
 	//gestion des rdv
 	public void manageAppointments() {
+		boolean p=true;
 	    System.out.print("Enter the specialty: ");
 	    String specialty = scanner.nextLine();  // Get specialty from user input
+          do {
+        	  System.out.print("Enter the day (e.g., Monday, Tuesday, etc.): ");
+      	    String day = scanner.nextLine();  // Get day from user input
 
-	    System.out.print("Enter the day (e.g., Monday, Tuesday, etc.): ");
-	    String day = scanner.nextLine();  // Get day from user input
+      	    // Check if the number of appointments for the given specialty and day is less than 8
+      	    if (checkAppointmentsAvailability(specialty, day)) {
+      	        // If there are fewer than 8 appointments, filter the doctors
+      	        List<doctor> availableDoctors = filterDoctorsBySpecialtyAndDay(specialty, day);
 
-	    // Check if the number of appointments for the given specialty and day is less than 8
-	    if (checkAppointmentsAvailability(specialty, day)) {
-	        // If there are fewer than 8 appointments, filter the doctors
-	        List<doctor> availableDoctors = filterDoctorsBySpecialtyAndDay(specialty, day);
+      	        if (availableDoctors.isEmpty()) {
+      	           System.out.println("No doctors available for " + specialty + " on " + day + ".");
+      	           p=false;
+      	        } else {
+      	            System.out.println("Available doctors for " + specialty + " on " + day + ":");
+      	            for (doctor doc : availableDoctors) {
+      	                System.out.println(doc.getNom() + " " + doc.getPrenom());
+      	            }
+      	          boolean sr=true;
+      	          do {
+      	        	  
+      	          System.out.print("Enter the name of the doctor: ");
+                  String doctorName = scanner.nextLine();
 
-	        if (availableDoctors.isEmpty()) {
-	            System.out.println("No doctors available for " + specialty + " on " + day + ".");
-	        } else {
-	            System.out.println("Available doctors for " + specialty + " on " + day + ":");
-	            for (doctor doc : availableDoctors) {
-	                System.out.println(doc.getNom() + " " + doc.getPrenom());
-	            }
-	        }
-	    } else {
-	        System.out.println("No more appointments available for " + specialty + " on " + day + ".");
-	    }
-	}
-	//solution for adding this to the rdv list
-	
+                  System.out.print("Enter the time of the appointment: ");
+                  int hour = scanner.nextInt();
+                  scanner.nextLine(); // consume newline
+
+                  doctor selectedDoctor = null;
+                  for (doctor doc : availableDoctors) {
+                      if (doc.getNom().equalsIgnoreCase(doctorName)) {
+                          selectedDoctor = doc;
+                          break;
+                      }
+                  }
+
+                  if (selectedDoctor != null) {
+                      System.out.print("Enter the patient's ID: ");
+                      String patientId = scanner.nextLine();
+
+                      Patient selectedPatient = null;
+                      for (Patient pat : patients) {
+                          if (pat.getIdPatient().equalsIgnoreCase(patientId)) {
+                              selectedPatient = pat;
+                              break;
+                          }
+                      }
+
+                      if (selectedPatient != null) {
+                          RDV newRdv = new RDV(day, hour, selectedPatient, selectedDoctor);
+                          rdvs.add(newRdv);
+                          System.out.println("Rendezvous added: " + newRdv);
+                      } else {
+                          System.out.println("Patient not found.");
+                          sr=false;
+                      } 
+                  } else {
+                      System.out.println("Doctor not found.");
+                      sr=false;
+                  }}while(sr=false);
+      	            
+      	        }
+      	    } else {
+      	        System.out.println("No more appointments available for " + specialty + " on " + day + ".");
+      	        p=false;
+      	    }
+      	}while(p=false);
+        	  
+          }
 }
