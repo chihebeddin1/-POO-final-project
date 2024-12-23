@@ -30,7 +30,7 @@ public class CabinetMedicale {
           System.out.println("Patient " + patient.getNom() + " ajouté avec succès !");
           return true;
     }
-    public Patient rechercherPatient(String idPatient) {
+    public static Patient rechercherPatient(String idPatient) {
         for (Patient p : patients) {
             if (p.idPatient.equals(idPatient)) {
                 return p;

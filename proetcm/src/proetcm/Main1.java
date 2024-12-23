@@ -30,7 +30,54 @@ public class Main1 {
                     System.out.println("Veuillez saisir votre mot de passe:");
                     String userMdp = scanner.nextLine();
                     if (CabinetMedicale.verifierUtilisateur(userId, userMdp)) {
-                        System.out.println("Bienvenue, Docteur! Vous êtes authentifié.");      
+                        System.out.println("Bienvenue, Docteur! Vous êtes authentifié.");
+                        System.out.println("Entre l'ID de votre patient:");
+                        String idpatientString=scanner.nextLine();
+                      Patient patient= CabinetMedicale.rechercherPatient(idpatientString);
+                        if(patient==null) {
+                        	System.out.println("votre patient n'exist pas");
+                        	System.out.println("voulez vous l'ajouter?");
+                        	String decisionString=scanner.nextLine();
+                            if(decisionString.equalsIgnoreCase("yes")) {
+                            	System.out.println("entrer le nom de votre pateint:");
+                            	  String nom=scanner.nextLine();
+                            	  System.out.println("entrer le prenom de votre pateint:");
+                            	  String prenom=scanner.nextLine();
+                            	  System.out.println("entrer l'adress de votre pateint:");
+                            	  String adress=scanner.nextLine();
+                            	  System.out.println("entrer le id de votre pateint:");
+                            	  String id=scanner.nextLine();
+                            	  System.out.println("entrer le numero de telephone de votre pateint:");
+                            	  int numdetelephon=scanner.nextInt();
+                            	  System.out.println("entrer le groupe sanguin de votre pateint:");
+                            	  String sang=scanner.nextLine();
+                            	  System.out.println("entrer le nombre d'operations votre pateint:");
+                            	  int numdeop=scanner.nextInt();
+                            	  System.out.println("entrer les allergies votre pateint:");
+                            	  String alergie=scanner.nextLine();
+                            	  ArrayList<String> alergieStrings = null;
+                            	  alergieStrings.add(alergie);
+                                  Patient patient2= new Patient(nom,prenom,numdetelephon,adress,"Patient",id,sang,alergieStrings,numdeop);
+                                  ((CabinetMedicale) CabinetMedicale.patients).ajouterPatient(patient2);
+                                  patient= CabinetMedicale.rechercherPatient(patient2.idPatient);
+                            }
+                        }
+                        
+                       
+                  	              System.out.println("la consultation de "+patient.nom+""+patient.prenom);
+                  	              PatientManagement patientManagement = new PatientManagement();
+                                  System.out.println("Entrez l'ordonnance:");
+                                  String orString=   patientManagement.writeOrdonnance(patient);
+                                  System.out.println("Ajoutez une observation:");                    
+                                  String obString=  patientManagement.addObservation(patient);
+                                  System.out.println("Ajoutez un certificat:");                      
+                                  String cerString= patientManagement.addCertificate(patient);                  	  
+                  	              String consultationString=orString+obString+cerString;
+                  	              patient.getConsultationhistory().add(consultationString);
+                  	  
+                  	  
+                  	  
+                  	  
                         //les tahes des docteurs
                     } else {
                         System.out.println("Authentification échouée. Vérifiez vos informations.");
@@ -72,6 +119,13 @@ public class Main1 {
                 }while(p=true);
             // Close the scanner to release system resources
     	
+                
+                
+                
+                
+                
+                
+                
       	 // Ajout de médecins
         doctor medecin1 = new doctor("Jean", "Martin", 987654321, "20 rue de la Santé", "Cardiologue", false ,"Dr.Martin","Santé55");
         doctor medecin2 = new doctor("Sophie", "Lemoine", 123789456, "15 rue des Lilas", "Dermatologue", true, "Dr.Lemoine","Santé66");
@@ -164,4 +218,16 @@ public class Main1 {
         System.out.println("Finally, we will print the doctor's schedule after the operations to see the changes.");
         medecin1.printSchedule();  // Print the doctor's schedule after the operations
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

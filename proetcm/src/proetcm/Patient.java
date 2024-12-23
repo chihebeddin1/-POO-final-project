@@ -22,13 +22,16 @@ public class Patient extends user {
 		this.nombreOperations = nombreOperations;
 	}
    
-    public void setOrdonnance(ordonnance ordonnance) {
-        this.ordonnance = ordonnance;
-    }
-
     public ordonnance getOrdonnance() {
-        return ordonnance;
-    }
+		return ordonnance;
+	}
+
+
+
+
+	public void setOrdonnance(ordonnance ordonnance) {
+		this.ordonnance = ordonnance;
+	}
 
 
 

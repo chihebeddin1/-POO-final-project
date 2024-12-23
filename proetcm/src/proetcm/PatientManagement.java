@@ -12,7 +12,7 @@ public class PatientManagement {
 
     // Write an ordonnance
  // Write an ordonnance
-    public void writeOrdonnance(Patient patient) {
+    public String writeOrdonnance(Patient patient) {
  
             System.out.println("Veuillez saisir l'ordonnance pour " + patient.getNom() + ":");
             System.out.print("Nom du médicament: ");
@@ -33,40 +33,45 @@ public class PatientManagement {
                 duree == null || duree.trim().isEmpty()) {
                 
                 System.out.println("Invalid ordonnance. Please provide valid details for all fields.");
-                return;
+                
+                return null;
             }
 
             // Set the ordonnance for the patient
             patient.setOrdonnance(ordonnance);
 
             // Print confirmation
-            System.out.println("Ordonnance ajoutée avec succès pour " + patient.getNom());
+            
+           System.out.println("Ordonnance ajoutée avec succès pour " + patient.getNom());
+           return ordonnance.toString();
         }
 
     // Add an observation
-    public void addObservation(Patient patient) {
+    public String addObservation(Patient patient) {
         System.out.print("Enter observation for " + patient.getNom() + ": ");
         String observation = scanner.nextLine();
 
         if (observation == null || observation.trim().isEmpty()) {
-            System.out.println("Invalid observation. Please provide a valid observation.");
-            return;
+            return  ("Invalid observation. Please provide a valid observation.");
+
         }
         patient.setObservation(observation);
         System.out.println("Observation added successfully for " + patient.getNom());
-    }
 
+        return observation;
+    }
     // Add a certificate
-    public void addCertificate(Patient patient) {
+    public String addCertificate(Patient patient) {
         System.out.print("Enter certificate for " + patient.getNom() + ": ");
         String certificate = scanner.nextLine();
 
         if (certificate == null || certificate.trim().isEmpty()) {
             System.out.println("Invalid certificate. Please provide a valid certificate.");
-            return;
+            return null;
         }
         patient.setCertificate(certificate);
         System.out.println("Certificate added successfully for " + patient.getNom());
+        return certificate;
     }
 
     // Close the scanner when done (if you're done with input)
