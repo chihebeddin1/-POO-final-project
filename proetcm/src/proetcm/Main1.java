@@ -12,28 +12,43 @@ public class Main1 {
 
      // Vérification de l'utilisateur
         boolean p= true;
-        do{
         //identifier l'user
+        	    	p= true;
                 Scanner scanner = new Scanner(System.in);
+                do {
                 System.out.println("veuillez saisir votre role:");
+                
                 String userrole = scanner.nextLine().toLowerCase();//lower case to work in switch
                 switch (userrole) {
                 case "doctor": {
-                    System.out.println("Veuillez saisir votre ID:");
+                	
+               
+					int i=0;
+					do {
+                	
+                	System.out.println("Veuillez saisir votre ID:");
                     String userId = scanner.nextLine();
                     System.out.println("Veuillez saisir votre mot de passe:");
                     String userMdp = scanner.nextLine();
                     if (CabinetMedicale.verifierUtilisateur(userId, userMdp)) {
                         System.out.println("Bienvenue, Docteur! Vous êtes authentifié.");
+                        
+                        
                         //les tahes des docteurs
                     } else {
                         System.out.println("Authentification échouée. Vérifiez vos informations.");
-                        p=false;
-                    }
-                    break;
+                       
+                        i=i+1;
+                    }}while(i<3);
+					System.out.print("error");
+					return;
+                   
                 }
                 case "secretaire": {
-                    System.out.println("Veuillez saisir votre ID:");
+                    int i=0;
+                	
+                	do {
+                	System.out.println("Veuillez saisir votre ID:");
                     String userId = scanner.nextLine();
                     System.out.println("Veuillez saisir votre mot de passe:");
                     String userMdp = scanner.nextLine();
@@ -43,17 +58,23 @@ public class Main1 {
                     } else {
                         System.out.println("Authentification échouée. Vérifiez vos informations.");
                         p=false;
-                    }
-                    break;
+                        i++;
+                    }}while(i<3);
+                	System.out.print("error");
+					return;
+                   
                 }
                 default: {
                     System.out.println("Rôle invalide. Veuillez entrer 'doctor' ou 'secretaire'.");
                     p=false;
+                    
                     break;
                 }
+                
             }
-            scanner.close(); // Close the scanner to release system resources
-        }while(p=false);
+               
+                }while(p=true);
+            // Close the scanner to release system resources
     	
       	 // Ajout de médecins
         doctor medecin1 = new doctor("Jean", "Martin", 987654321, "20 rue de la Santé", "Cardiologue", false ,"Dr.Martin","Santé55");
@@ -70,11 +91,23 @@ public class Main1 {
 
 
         // Ajout de patients
-        Patient patient1 = new Patient("Alice", "Dubois", 112233445, "Cheraga",   "P001");
-        Patient patient2 = new Patient("Marc", "Durand",  667788990, "Douera", "P002");
-        Patient patient3 = new Patient("Ahmed", "trun", 112132456, "BabaHassen",   "P003");
-        Patient patient4 = new Patient("Qwidar", "Fadali", 122333447, "Bebzouar",   "P004");
-        Patient patient5 = new Patient("Anis", "Diara", 819235045, "Draria",   "P005");
+        ArrayList<String> allergiesPatient1 = null;
+        allergiesPatient1.add("chat");
+        ArrayList<String> allergiesPatient2 = null;
+        allergiesPatient2.add("Fraise");
+        ArrayList<String> allergiesPatient3 = null;
+        allergiesPatient3.add("poussière");
+        ArrayList<String> allergiesPatient4 = null;
+        allergiesPatient4.add("glutin");
+        ArrayList<String> allergiesPatient5 = null;
+        allergiesPatient5.add("kiwi");
+
+
+        Patient patient1 = new Patient("Alice", "Dubois", 112233445, "Cheraga",   "P001" ,"A", "Patient", allergiesPatient1,2);
+        Patient patient2 = new Patient("Marc", "Durand",  667788990, "Douera", "P002", "B+", "Patient", allergiesPatient2, 0);
+        Patient patient3 = new Patient("Ahmed", "trun", 112132456, "BabaHassen",   "P003", "AB+", "Patient", allergiesPatient3, 0);
+        Patient patient4 = new Patient("Qwidar", "Fadali", 122333447, "Bebzouar",   "P004", "A-", "Patient", allergiesPatient4, 3);
+        Patient patient5 = new Patient("Anis", "Diara", 819235045, "Draria",   "P005", "O-", "Patient", allergiesPatient5, 1);
 
         CabinetMedicale.ajouterPatient(patient1);
         CabinetMedicale.ajouterPatient(patient2);
@@ -134,9 +167,5 @@ public class Main1 {
         System.out.println("\n---- Printing the Doctor's Schedule ----");
         System.out.println("Finally, we will print the doctor's schedule after the operations to see the changes.");
         medecin1.printSchedule();  // Print the doctor's schedule after the operations
-        
-        
-     
-
 	}
 }

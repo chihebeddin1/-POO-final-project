@@ -14,7 +14,6 @@ public class CabinetMedicale {
     
     Scanner scanner = new Scanner(System.in);
 	//gestion des patients
-
     public static boolean ajouterPatient(Patient patient) {
     	  if (patients == null) {
               patients = new ArrayList<>();
@@ -31,7 +30,6 @@ public class CabinetMedicale {
           System.out.println("Patient " + patient.getNom() + " ajouté avec succès !");
           return true;
     }
-    
     public Patient rechercherPatient(String idPatient) {
         for (Patient p : patients) {
             if (p.idPatient.equals(idPatient)) {
