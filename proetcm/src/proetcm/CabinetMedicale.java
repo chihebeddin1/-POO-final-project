@@ -55,11 +55,17 @@ public class CabinetMedicale {
     //gestion médcin 
     
     public static void ajouterMedecin(doctor medecin) {
-        if (doctors == null) {
-            doctors = new ArrayList<>(); // Initialisation de la liste si elle est null
+        if (CabinetMedicale.doctors == null) {
+            CabinetMedicale.doctors = new ArrayList<>();
+        }
+        for (doctor d : doctors) {
+            if (d.getIdentifiant().equals(medecin.getIdentifiant())) {
+                System.out.println("Un médecin avec cet identifiant existe déjà : " + medecin.getIdentifiant());
+                return;
+            }
         }
         doctors.add(medecin);
-        System.out.println("Médecin ajouté avec succès.");
+        System.out.println("Médecin ajouté avec succès : " + medecin.getNom() + " " + medecin.getPrenom());
     }
     
  // Afficher les médecins
@@ -77,22 +83,19 @@ public class CabinetMedicale {
     
     // Gestion de la secrétaire
     public static void ajouterSecretaire(secretaire secretaire) {
-        if (CabinetMedicale.secretaire == null) {
-            CabinetMedicale.secretaire = secretaire;
-            System.out.println("Secrétaire ajoutée avec succès : " + secretaire.getNom() + " " + secretaire.getPrenom());
-        } else {
-            for (secretaire p : secretaires ) {
-                if (p.nom.equals(secretaire.nom)&&p.prenom.equals(secretaire.prenom)) {
-                   System.out.println("elle exist deja");
-                   return ;
-                 }
-                }
-            System.out.println("Secrétaire ajoutée avec succès : " + secretaire.getNom() + " " + secretaire.getPrenom());
-                    System.out.println("mabrouk");
-                    secretaires.add(secretaire);
-            }
+        if (CabinetMedicale.secretaires == null) {
+            CabinetMedicale.secretaires = new ArrayList<>();
+        }
 
-            return ;
+        for (secretaire s : secretaires) {
+            if (s.getIdentifiant().equals(secretaire.getIdentifiant())) {
+                System.out.println("Une secrétaire avec cet identifiant existe déjà : " + secretaire.getIdentifiant());
+                return;
+            }
+        }
+
+        secretaires.add(secretaire);
+        System.out.println("Secrétaire ajoutée avec succès : " + secretaire.getNom() + " " + secretaire.getPrenom());
     }
 
 
