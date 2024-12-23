@@ -25,15 +25,12 @@ public class Main1 {
                
 					int i=0;
 					do {
-                	
                 	System.out.println("Veuillez saisir votre ID:");
                     String userId = scanner.nextLine();
                     System.out.println("Veuillez saisir votre mot de passe:");
                     String userMdp = scanner.nextLine();
                     if (CabinetMedicale.verifierUtilisateur(userId, userMdp)) {
-                        System.out.println("Bienvenue, Docteur! Vous êtes authentifié.");
-                        
-                        
+                        System.out.println("Bienvenue, Docteur! Vous êtes authentifié.");      
                         //les tahes des docteurs
                     } else {
                         System.out.println("Authentification échouée. Vérifiez vos informations.");
@@ -42,7 +39,6 @@ public class Main1 {
                     }}while(i<3);
 					System.out.print("error");
 					return;
-                   
                 }
                 case "secretaire": {
                     int i=0;

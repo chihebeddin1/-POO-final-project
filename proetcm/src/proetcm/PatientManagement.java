@@ -11,17 +11,37 @@ public class PatientManagement {
     }
 
     // Write an ordonnance
+ // Write an ordonnance
     public void writeOrdonnance(Patient patient) {
-        System.out.print("Enter ordonnance for " + patient.getNom() + ": ");
-        String ordonnance = scanner.nextLine();
+ 
+            System.out.println("Veuillez saisir l'ordonnance pour " + patient.getNom() + ":");
+            System.out.print("Nom du médicament: ");
+            
+            String nommedicament = scanner.nextLine();
 
-        if (ordonnance == null || ordonnance.trim().isEmpty()) {
-            System.out.println("Invalid ordonnance. Please provide a valid ordonnance.");
-            return;
+            System.out.print("Doses : ");
+            String lesdoses = scanner.nextLine();
+
+            System.out.print("Durée : ");
+            String duree = scanner.nextLine();
+
+            ordonnance ordonnance = new ordonnance(nommedicament, lesdoses, duree);
+           
+         // Check if any of the fields in ordonnance are invalid (null or empty)
+            if (nommedicament == null || nommedicament.trim().isEmpty() ||
+                lesdoses == null || lesdoses.trim().isEmpty() ||
+                duree == null || duree.trim().isEmpty()) {
+                
+                System.out.println("Invalid ordonnance. Please provide valid details for all fields.");
+                return;
+            }
+
+            // Set the ordonnance for the patient
+            patient.setOrdonnance(ordonnance);
+
+            // Print confirmation
+            System.out.println("Ordonnance ajoutée avec succès pour " + patient.getNom());
         }
-        patient.setOrdonnance(ordonnance);
-        System.out.println("Ordonnance added successfully for " + patient.getNom());
-    }
 
     // Add an observation
     public void addObservation(Patient patient) {

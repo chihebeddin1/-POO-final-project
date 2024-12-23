@@ -3,7 +3,7 @@
 	import java.util.ArrayList;
 public class Patient extends user {
 	
-    private String ordonnance;
+    private ordonnance ordonnance;
     private String observation;
     private String certificate;
     String idPatient;
@@ -22,16 +22,13 @@ public class Patient extends user {
 		this.nombreOperations = nombreOperations;
 	}
    
-    public String getOrdonnance() {
-		return ordonnance;
-	}
+    public void setOrdonnance(ordonnance ordonnance) {
+        this.ordonnance = ordonnance;
+    }
 
-
-
-
-	public void setOrdonnance(String ordonnance) {
-		this.ordonnance = ordonnance;
-	}
+    public ordonnance getOrdonnance() {
+        return ordonnance;
+    }
 
 
 
