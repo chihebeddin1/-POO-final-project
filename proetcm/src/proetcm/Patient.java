@@ -7,13 +7,13 @@ public class Patient extends user {
     private String observation;
     private String certificate;
     String idPatient;
-    private ArrayList<String> consultationhistory;    //l'historique de chaque patient
+    static ArrayList<String> consultationhistory;    //l'historique de chaque patient
     private String groupeSanguin;
     private ArrayList<String> allergies; // Liste des allergies du patient
     private int nombreOperations; // Nombre d'opérations effectuées
     
     // Constructor to initialize the patient's basic information
-    public Patient(String nom, String prenom, int numdetelephone, String adress, String role, String idPatient,String groupeSanguin, ArrayList<String> allergies, int nombreOperations) {
+    public Patient(String nom, String prenom, int numdetelephone, String adress, String idPatient,String groupeSanguin, ArrayList<String> allergies, int nombreOperations) {
 		super(nom, prenom, numdetelephone, adress, "Patient");
 		this.idPatient = idPatient;
 		this.consultationhistory =  new ArrayList<>();
@@ -137,7 +137,7 @@ public class Patient extends user {
     }
 	
 
-	public void afficherConsultations() {
+	public static void afficherConsultations() {
         System.out.println("Historique des consultations pour le patient " + nom + " :");
         if (consultationhistory.isEmpty()) {
             System.out.println("Aucune consultation enregistrée.");

@@ -5,11 +5,50 @@ import java.util.Scanner;
 
 public class Main1 {
 
+	@SuppressWarnings("null")
 	public static void main(String[] args) {
 		CabinetMedicale.patients = new ArrayList<>();
         CabinetMedicale.doctors = new ArrayList<>();
         CabinetMedicale.secretaires = new ArrayList<>();
+        doctor medecin1 = new doctor("Jean", "Martin", 987654321, "20 rue de la Santé", "Cardiologue", false ,"Dr.Martin","Santé55");
+        doctor medecin2 = new doctor("Sophie", "Lemoine", 123789456, "15 rue des Lilas", "Dermatologue", true, "Dr.Lemoine","Santé66");
+        doctor medecin3 = new doctor("hamid", "soup", 123784856, "10 rue des Lilas", "Ophetalmologue", true, "Dr.soup","Santé77");
+        doctor medecin4 = new doctor("sarah", "ougour", 123879456, "8 rue des Lilas", "Dentiste", true, "Dr.ougour","Santé22");
+        doctor medecin5 = new doctor("meriem", "ougnoune", 132789456, "2 rue des Lilas", "Endocrinologie", false, "Dr.ougnoune","Santé33");
 
+        CabinetMedicale.ajouterMedecin(medecin1);
+        CabinetMedicale.ajouterMedecin(medecin2);
+        CabinetMedicale.ajouterMedecin(medecin3);
+        CabinetMedicale.ajouterMedecin(medecin4);
+        CabinetMedicale.ajouterMedecin(medecin5);
+        
+
+        // Ajout de patients
+        ArrayList<String> allergiesPatient1 =  new ArrayList<>();
+        allergiesPatient1.add("chat");
+        ArrayList<String> allergiesPatient2 = new ArrayList<>();
+        allergiesPatient2.add("Fraise");
+        ArrayList<String> allergiesPatient3 =  new ArrayList<>();
+        allergiesPatient3.add("poussière");
+        ArrayList<String> allergiesPatient4 =  new ArrayList<>();
+        allergiesPatient4.add("glutin");
+        ArrayList<String> allergiesPatient5 =  new ArrayList<>();
+        allergiesPatient5.add("kiwi");
+
+
+        
+        
+        Patient patient1 = new Patient("Alice", "Dubois", 112233445, "Cheraga",   "P001" ,"A", allergiesPatient1,2);
+        Patient patient2 = new Patient("Marc", "Durand",  667788990, "Douera", "P002", "B+", allergiesPatient2, 0);
+        Patient patient3 = new Patient("Ahmed", "trun", 112132456, "BabaHassen",   "P003", "AB+", allergiesPatient3, 0);
+        Patient patient4 = new Patient("Qwidar", "Fadali", 122333447, "Bebzouar",   "P004", "A-", allergiesPatient4, 3);
+        Patient patient5 = new Patient("Anis", "Diara", 819235045, "Draria",   "P005", "O-", allergiesPatient5, 1);
+
+        CabinetMedicale.ajouterPatient(patient1);
+        CabinetMedicale.ajouterPatient(patient2);
+        CabinetMedicale.ajouterPatient(patient3);
+        CabinetMedicale.ajouterPatient(patient4);
+        CabinetMedicale.ajouterPatient(patient5);
      // Vérification de l'utilisateur
         boolean p= true;
         //identifier l'user
@@ -45,25 +84,38 @@ public class Main1 {
                             	  String prenom=scanner.nextLine();
                             	  System.out.println("entrer l'adress de votre pateint:");
                             	  String adress=scanner.nextLine();
+                            	  
+                            	  
                             	  System.out.println("entrer le id de votre pateint:");
                             	  String id=scanner.nextLine();
+                            	  
                             	  System.out.println("entrer le numero de telephone de votre pateint:");
                             	  int numdetelephon=scanner.nextInt();
+                            	  scanner.nextLine();
+                            	  
                             	  System.out.println("entrer le groupe sanguin de votre pateint:");
                             	  String sang=scanner.nextLine();
+                            	  
+                            	  
+                            	  
                             	  System.out.println("entrer le nombre d'operations votre pateint:");
                             	  int numdeop=scanner.nextInt();
+                            	  
+                            	  scanner.nextLine();
+                            	  
                             	  System.out.println("entrer les allergies votre pateint:");
                             	  String alergie=scanner.nextLine();
-                            	  ArrayList<String> alergieStrings = null;
+                            	  
+                            	  ArrayList<String> alergieStrings = new ArrayList<>();;
                             	  alergieStrings.add(alergie);
-                                  Patient patient2= new Patient(nom,prenom,numdetelephon,adress,"Patient",id,sang,alergieStrings,numdeop);
-                                  ((CabinetMedicale) CabinetMedicale.patients).ajouterPatient(patient2);
-                                  patient= CabinetMedicale.rechercherPatient(patient2.idPatient);
+                            	  
+                                  Patient patient21= new Patient(nom,prenom,numdetelephon,adress,id,sang,alergieStrings,numdeop);
+                                  CabinetMedicale.ajouterPatient(patient21);
+                                  patient= CabinetMedicale.rechercherPatient(patient21.idPatient);
                             }
                         }
                         
-                       
+                                  scanner.nextLine();
                   	              System.out.println("la consultation de "+patient.nom+""+patient.prenom);
                   	              PatientManagement patientManagement = new PatientManagement();
                                   System.out.println("Entrez l'ordonnance:");
@@ -71,10 +123,28 @@ public class Main1 {
                                   System.out.println("Ajoutez une observation:");                    
                                   String obString=  patientManagement.addObservation(patient);
                                   System.out.println("Ajoutez un certificat:");                      
-                                  String cerString= patientManagement.addCertificate(patient);                  	  
-                  	              String consultationString=orString+obString+cerString;
-                  	              patient.getConsultationhistory().add(consultationString);
-                  	  
+                                  String cerString= patientManagement.addCertificate(patient); 
+                                  StringBuilder sb = new StringBuilder();
+                                  
+                                  sb.append(orString);
+                                  sb.append("\n");
+                                  sb.append("2. observation");
+                                  sb.append(" ");
+                                  sb.append("{");
+                                  sb.append(obString);
+                                  sb.append("}");
+                                  sb.append("\n");
+                                  sb.append("3. certaficat");
+                                  sb.append(" ");
+                                  sb.append("{");
+                  	              sb.append(cerString);
+                  	              sb.append("}");
+                  	              sb.append("\n");
+                  	              String result = sb.toString();
+                  	              patient.getConsultationhistory().add(result);
+                  	              
+                  	              patient.afficherConsultations();
+                  	             p=false;
                   	  
                   	  
                   	  
@@ -83,7 +153,9 @@ public class Main1 {
                         System.out.println("Authentification échouée. Vérifiez vos informations.");
                        
                         i=i+1;
-                    }}while(i<3);
+                    }
+                    }while(i<3&&p==true);
+					if(p==true);
 					System.out.print("error");
 					return;
                 }
@@ -116,7 +188,7 @@ public class Main1 {
                 
             }
                
-                }while(p=true);
+                }while(p==true);
             // Close the scanner to release system resources
     	
                 
@@ -127,43 +199,9 @@ public class Main1 {
                 
                 
       	 // Ajout de médecins
-        doctor medecin1 = new doctor("Jean", "Martin", 987654321, "20 rue de la Santé", "Cardiologue", false ,"Dr.Martin","Santé55");
-        doctor medecin2 = new doctor("Sophie", "Lemoine", 123789456, "15 rue des Lilas", "Dermatologue", true, "Dr.Lemoine","Santé66");
-        doctor medecin3 = new doctor("hamid", "soup", 123784856, "10 rue des Lilas", "Ophetalmologue", true, "Dr.soup","Santé77");
-        doctor medecin4 = new doctor("sarah", "ougour", 123879456, "8 rue des Lilas", "Dentiste", true, "Dr.ougour","Santé22");
-        doctor medecin5 = new doctor("meriem", "ougnoune", 132789456, "2 rue des Lilas", "Endocrinologie", false, "Dr.ougnoune","Santé33");
-
-        CabinetMedicale.ajouterMedecin(medecin1);
-        CabinetMedicale.ajouterMedecin(medecin2);
-        CabinetMedicale.ajouterMedecin(medecin3);
-        CabinetMedicale.ajouterMedecin(medecin4);
-        CabinetMedicale.ajouterMedecin(medecin5);
+     
 
 
-        // Ajout de patients
-        ArrayList<String> allergiesPatient1 = null;
-        allergiesPatient1.add("chat");
-        ArrayList<String> allergiesPatient2 = null;
-        allergiesPatient2.add("Fraise");
-        ArrayList<String> allergiesPatient3 = null;
-        allergiesPatient3.add("poussière");
-        ArrayList<String> allergiesPatient4 = null;
-        allergiesPatient4.add("glutin");
-        ArrayList<String> allergiesPatient5 = null;
-        allergiesPatient5.add("kiwi");
-
-
-        Patient patient1 = new Patient("Alice", "Dubois", 112233445, "Cheraga",   "P001" ,"A", "Patient", allergiesPatient1,2);
-        Patient patient2 = new Patient("Marc", "Durand",  667788990, "Douera", "P002", "B+", "Patient", allergiesPatient2, 0);
-        Patient patient3 = new Patient("Ahmed", "trun", 112132456, "BabaHassen",   "P003", "AB+", "Patient", allergiesPatient3, 0);
-        Patient patient4 = new Patient("Qwidar", "Fadali", 122333447, "Bebzouar",   "P004", "A-", "Patient", allergiesPatient4, 3);
-        Patient patient5 = new Patient("Anis", "Diara", 819235045, "Draria",   "P005", "O-", "Patient", allergiesPatient5, 1);
-
-        CabinetMedicale.ajouterPatient(patient1);
-        CabinetMedicale.ajouterPatient(patient2);
-        CabinetMedicale.ajouterPatient(patient3);
-        CabinetMedicale.ajouterPatient(patient4);
-        CabinetMedicale.ajouterPatient(patient5);
 
 
      // Ajout d'une secrétaire

@@ -1,7 +1,7 @@
 package proetcm;
 
 public abstract class user {
-    String nom;
+    static String nom;
     String prenom;
     int numdetelephone;
     String adress;
