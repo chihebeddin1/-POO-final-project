@@ -8,11 +8,34 @@ public class secretaire extends user{
     private List<doctor> doctors;
     private List<Patient> patients;
     private List<RDV> rdvs;
-    private Scanner scanner;
+    public String getIdentifiant() {
+		return Identifiant;
+	}
+
+
+	public void setIdentifiant(String Identifiant) {
+		this.Identifiant = Identifiant;
+	}
+
+
+	public String getMotDePasse() {
+		return MotDePasse;
+	}
+
+
+	public void setMotDePasse(String MotDePasse) {
+		this.MotDePasse = MotDePasse;
+	}
+
+	private Scanner scanner;
+    private String Identifiant;
+    private String MotDePasse;
     
     // Constructor
-    public secretaire(String nom, String prenom, int numdetelephone, String adress) {
+    public secretaire(String nom, String prenom, int numdetelephone, String adress , String Identifiant, String MotDePasse) {
     	super( nom,  prenom,  numdetelephone,  adress , "secretaire");
+    	this.Identifiant = Identifiant;
+    	this.MotDePasse = MotDePasse;
         this.doctors = new ArrayList<>();
         this.patients = new ArrayList<>();
         this.rdvs = new ArrayList<>();

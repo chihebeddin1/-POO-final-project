@@ -8,17 +8,37 @@ public class doctor extends user {
     boolean surgery;
     private Scanner scanner;
     private Map<String, hourschedule> schedule;  // Map to store the schedule by day
+    private String Identifiant;
+    private String MotDePasse;
     
     // Constructor
-    public doctor(String nom, String prenom, int numdetelephone, String adress, String specialty, boolean surgery) {
+    public doctor(String nom, String prenom, int numdetelephone, String adress, String specialty, boolean surgery, String Identifiant, String MotDePasse) {
         super(nom, prenom, numdetelephone, adress, "Docteur"); // Correct constructor call
         this.specialty = specialty;
         this.surgery = surgery;
+        this.Identifiant =Identifiant;
+        this.MotDePasse = MotDePasse;
         this.scanner = new Scanner(System.in);
         this.schedule = new HashMap<>();
     }
     
-    // Add or update the schedule for a specific day
+    public String getIdentifiant() {
+		return Identifiant;
+	}
+
+	public void setIdentifiant(String Identifiant) {
+		this.Identifiant = Identifiant;
+	}
+
+	public String getMotDePasse() {
+		return MotDePasse;
+	}
+
+	public void setMotDePasse(String MotDePasse) {
+		this.MotDePasse = MotDePasse;
+	}
+
+	// Add or update the schedule for a specific day
     public void addSchedule() {
         // Read day and start/end times as strings first
         System.out.print("Enter the day of the week (e.g., Monday, Tuesday, etc.): ");
