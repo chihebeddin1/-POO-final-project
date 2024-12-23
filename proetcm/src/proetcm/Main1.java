@@ -10,6 +10,50 @@ public class Main1 {
         CabinetMedicale.doctors = new ArrayList<>();
         CabinetMedicale.secretaires = new ArrayList<>();
 
+     // Vérification de l'utilisateur
+        boolean p= true;
+        do{
+        //identifier l'user
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("veuillez saisir votre role:");
+                String userrole = scanner.nextLine().toLowerCase();//lower case to work in switch
+                switch (userrole) {
+                case "doctor": {
+                    System.out.println("Veuillez saisir votre ID:");
+                    String userId = scanner.nextLine();
+                    System.out.println("Veuillez saisir votre mot de passe:");
+                    String userMdp = scanner.nextLine();
+                    if (CabinetMedicale.verifierUtilisateur(userId, userMdp)) {
+                        System.out.println("Bienvenue, Docteur! Vous êtes authentifié.");
+                        //les tahes des docteurs
+                    } else {
+                        System.out.println("Authentification échouée. Vérifiez vos informations.");
+                        p=false;
+                    }
+                    break;
+                }
+                case "secretaire": {
+                    System.out.println("Veuillez saisir votre ID:");
+                    String userId = scanner.nextLine();
+                    System.out.println("Veuillez saisir votre mot de passe:");
+                    String userMdp = scanner.nextLine();
+                    if (CabinetMedicale.verifierUtilisateur(userId, userMdp)) {
+                        System.out.println("Bienvenue, Secrétaire! Vous êtes authentifié.");
+                        // les tache des secretaires...
+                    } else {
+                        System.out.println("Authentification échouée. Vérifiez vos informations.");
+                        p=false;
+                    }
+                    break;
+                }
+                default: {
+                    System.out.println("Rôle invalide. Veuillez entrer 'doctor' ou 'secretaire'.");
+                    p=false;
+                    break;
+                }
+            }
+            scanner.close(); // Close the scanner to release system resources
+        }while(p=false);
     	
       	 // Ajout de médecins
         doctor medecin1 = new doctor("Jean", "Martin", 987654321, "20 rue de la Santé", "Cardiologue", false ,"Dr.Martin","Santé55");
@@ -44,11 +88,16 @@ public class Main1 {
         secretaire secretaire3 = new secretaire("sherine", "malah", 132456789, "5 rue de la Paix", "malah","Santé2");
         secretaire secretaire4 = new secretaire("imen", "tila", 123456789, "4 rue de la Paix", "tila","Santé3");
         secretaire secretaire5 = new secretaire("omar", "karit", 143256879, "2 rue de la Paix", "karit","Santé4");
+        secretaire secretaire6 = new secretaire("omar", "karit", 143256879, "2 rue de la Paix", "karit","Santé4");
+
+        
 
         CabinetMedicale.ajouterSecretaire(secretaire1);
         CabinetMedicale.ajouterSecretaire(secretaire3);
         CabinetMedicale.ajouterSecretaire(secretaire4);
         CabinetMedicale.ajouterSecretaire(secretaire5);
+        CabinetMedicale.ajouterSecretaire(secretaire6);
+
 
         // Tentative d'ajout d'une autre secrétaire
         secretaire secretaire2 = new secretaire("Anne", "Martin", 987645321, "15 avenue des Roses","Martin","Santé5");
@@ -87,23 +136,7 @@ public class Main1 {
         medecin1.printSchedule();  // Print the doctor's schedule after the operations
         
         
-     // Vérification de l'utilisateur
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Veuillez entrer votre Identifiant :");
-        String Identifiant = scanner.nextLine();
-        System.out.println("Veuillez entrer votre Mot De Passe :");
-        String MotDePasse = scanner.nextLine();
-
-        if (CabinetMedicale.verifierUtilisateur(Identifiant, MotDePasse)) {
-            System.out.println("Authentification réussie. Bienvenue dans l'application !");
-            // Le reste du code (gestion des médecins, patients, etc.)
-        } else {
-            System.out.println("Erreur : Identifiant ou mot de passe incorrect. Vous n'êtes pas autorisé à accéder à cette application.");
-        }
-
-        scanner.close();
-        //save
+     
 
 	}
-
 }

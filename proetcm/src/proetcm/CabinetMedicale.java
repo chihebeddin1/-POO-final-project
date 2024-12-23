@@ -83,16 +83,20 @@ public class CabinetMedicale {
             CabinetMedicale.secretaire = secretaire;
             System.out.println("Secrétaire ajoutée avec succès : " + secretaire.getNom() + " " + secretaire.getPrenom());
         } else {
-        	for (Patient p : patients) {
-                if (p.idPatient.equals(idPatient)) {
-                    return p;
+            for (secretaire p : secretaires ) {
+                if (p.nom.equals(secretaire.nom)&&p.prenom.equals(secretaire.prenom)) {
+                   System.out.println("elle exist deja");
+                   return ;
+                 }
                 }
+            System.out.println("Secrétaire ajoutée avec succès : " + secretaire.getNom() + " " + secretaire.getPrenom());
+                    System.out.println("mabrouk");
+                    secretaires.add(secretaire);
             }
-            return null;
-        	
-            System.out.println("Une secrétaire est déjà assignée. Impossible d'en ajouter une autre.");
-        }
+
+            return ;
     }
+
 
     public static void afficherSecretaire() {
         if (secretaire == null) {
