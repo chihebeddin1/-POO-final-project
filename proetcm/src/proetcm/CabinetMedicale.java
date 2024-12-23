@@ -95,7 +95,6 @@ public class CabinetMedicale {
         }
     }
     
-    
     public static boolean verifierUtilisateur(String Identifiant, String MotDePasse) {
         // Vérifier dans la liste des médecins
         for (doctor medecin : doctors) {

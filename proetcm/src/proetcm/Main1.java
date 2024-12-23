@@ -3,11 +3,10 @@ package proetcm;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+public class Main1 {
 
-public class Main {
-    public static void main(String[] args) {
-    	
-    	CabinetMedicale.patients = new ArrayList<>();
+	public static void main(String[] args) {
+		CabinetMedicale.patients = new ArrayList<>();
         CabinetMedicale.doctors = new ArrayList<>();
         CabinetMedicale.secretaires = new ArrayList<>();
 
@@ -103,14 +102,8 @@ public class Main {
         }
 
         scanner.close();
-    }
-        
-        
-        
-    }
-    
-    
-    
-    
-    
+        //save
+
+	}
+
 }
