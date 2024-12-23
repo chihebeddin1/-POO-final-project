@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 
 
-
-
 public class CabinetMedicale {
     static List <Patient> patients;
     static List<doctor> doctors;
@@ -39,7 +37,7 @@ public class CabinetMedicale {
   }
     
     
-    public void afficherPatients() {
+    public static void afficherPatients() {
         if (patients.isEmpty()) {
             System.out.println("Aucun patient enregistré.");
         } else {
@@ -53,13 +51,13 @@ public class CabinetMedicale {
     
     //gestion médcin 
     
-    public void ajouterMedecin(doctor medecin) {
+    public static void ajouterMedecin(doctor medecin) {
         doctors.add(medecin);
         System.out.println("Médecin ajouté avec succès.");
     }
     
  // Afficher les médecins
-    public void afficherMedecins() {
+    public static void afficherMedecins() {
         if (doctors.isEmpty()) {
             System.out.println("Aucun médecin enregistré.");
             return;
@@ -69,6 +67,27 @@ public class CabinetMedicale {
             System.out.println(medecin);
         }
     }
+    
+    
+    // Gestion de la secrétaire
+    public static void ajouterSecretaire(secretaire secretaire) {
+        if (CabinetMedicale.secretaire == null) {
+            CabinetMedicale.secretaire = secretaire;
+            System.out.println("Secrétaire ajoutée avec succès : " + secretaire.getNom() + " " + secretaire.getPrenom());
+        } else {
+            System.out.println("Une secrétaire est déjà assignée. Impossible d'en ajouter une autre.");
+        }
+    }
+
+    public static void afficherSecretaire() {
+        if (secretaire == null) {
+            System.out.println("Aucune secrétaire assignée.");
+        } else {
+            System.out.println("Secrétaire actuelle : " + secretaire.getNom() + " " + secretaire.getPrenom());
+        }
+    }
+    
+    
 }
     
   

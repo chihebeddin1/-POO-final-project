@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class secretaire {
+public class secretaire extends user{
     
     private List<doctor> doctors;
     private List<Patient> patients;
@@ -11,7 +11,8 @@ public class secretaire {
     private Scanner scanner;
     
     // Constructor
-    public secretaire() {
+    public secretaire(String nom, String prenom, int numdetelephone, String adress) {
+    	super( nom,  prenom,  numdetelephone,  adress , "secretaire");
         this.doctors = new ArrayList<>();
         this.patients = new ArrayList<>();
         this.rdvs = new ArrayList<>();
