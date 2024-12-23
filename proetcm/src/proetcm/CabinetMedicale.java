@@ -5,15 +5,17 @@ import java.util.Scanner;
 
 
 
+
 public class CabinetMedicale {
-	//gestion des patients
-    private List <Patient> patients;
-    private List<doctor> doctors;
-
-
-
+    static List <Patient> patients;
+    static List<doctor> doctors;
+    static secretaire secretaire;
+    
+    
     Scanner scanner = new Scanner(System.in);
-    public  boolean ajouterPatient(Patient patient) {
+	//gestion des patients
+
+    public static boolean ajouterPatient(Patient patient) {
         // Vérifie si l'ID du patient est unique
         for (Patient p : patients) {
             if (p.getIdPatient().equals(patient.getIdPatient())) {
@@ -22,17 +24,10 @@ public class CabinetMedicale {
             }
         }
         // Ajoute le patient s'il est unique
-        String nom = scanner.nextLine();
-        String prenom = scanner.nextLine();
-        int numdetelephone = scanner.nextInt();
-        String adress = scanner.nextLine();
-        String IdPatient = scanner.nextLine();
-        Patient newPatient = new Patient(nom, prenom, numdetelephone, adress, IdPatient);
-        patients.add(newPatient);
-        System.out.println("Patient " + patient.getNom() + patient.getPrenom()+ patient.getAdress() + patient.getNumdetelephone()+ patient.getIdPatient()+ " ajouté avec succès !");
+        patients.add(patient);
+        System.out.println("Patient " + patient.getNom() + " ajouté avec succès !");
         return true;
     }
-	 
     
     public Patient rechercherPatient(String idPatient) {
         for (Patient p : patients) {
@@ -55,12 +50,24 @@ public class CabinetMedicale {
         }
     }
     
+    
     //gestion médcin 
     
-    public void ajouterMedecin(doctor doctor) {
-    	
-    	doctors.add(doctor);
-        System.out.println("Médecin ajouté: " + doctor);
+    public void ajouterMedecin(doctor medecin) {
+        doctors.add(medecin);
+        System.out.println("Médecin ajouté avec succès.");
+    }
+    
+ // Afficher les médecins
+    public void afficherMedecins() {
+        if (doctors.isEmpty()) {
+            System.out.println("Aucun médecin enregistré.");
+            return;
+        }
+        System.out.println("Liste des médecins :");
+        for (doctor medecin : doctors) {
+            System.out.println(medecin);
+        }
     }
 }
     
