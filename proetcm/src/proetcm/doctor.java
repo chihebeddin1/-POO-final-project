@@ -4,9 +4,6 @@ import java.util.Map;
 import java.util.HashMap;
 
 
-import java.util.Scanner;
-import java.util.Map;
-import java.util.HashMap;
 
 public class doctor extends user {
     String specialty;
@@ -191,5 +188,4 @@ public class doctor extends user {
 	public void addSchedule(String string, hourschedule hourschedule) {
 		// TODO Auto-generated method stub
 		
-	}
-}
+	}}

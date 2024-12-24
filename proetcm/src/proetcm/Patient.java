@@ -137,8 +137,8 @@ public class Patient extends user {
     }
 	
 
-	public static void afficherConsultations() {
-        System.out.println("Historique des consultations pour le patient " + nom + " :");
+	public static void afficherConsultations(Patient patient) {
+        System.out.println("Historique des consultations pour le patient " + patient.nom + " :");
         if (consultationhistory.isEmpty()) {
             System.out.println("Aucune consultation enregistrée.");
         } else {

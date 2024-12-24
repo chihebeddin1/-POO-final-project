@@ -5,7 +5,7 @@ package proetcm;
 
 public abstract class user {
 
-     static String nom;
+     String nom;
 
     String prenom;
 
@@ -22,7 +22,7 @@ public abstract class user {
 
     public user(String nom, String prenom, int numdetelephone, String adress, String role) {
 
-        user.nom = nom;
+        this.nom = nom;
 
         this.prenom = prenom;  // Fix the typo here
 
@@ -46,7 +46,7 @@ public abstract class user {
 
     public void setNom(String nom) {
 
-        user.nom = nom;
+        this.nom = nom;
 
     }
 

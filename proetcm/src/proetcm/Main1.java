@@ -189,7 +189,7 @@ public class Main1 {
                   	              String result = sb.toString();
                   	              patient.getConsultationhistory().add(result);
                   	              
-                  	              patient.afficherConsultations();
+                  	              patient.afficherConsultations(patient);
                   	             p=false;
                   	  
                   	  
