@@ -46,7 +46,14 @@ public class CabinetMedicale {
         }
         return null;
   }
-    
+    public static doctor rechercherdoctor(String iddoctor) {
+        for (doctor p : doctors) {
+            if (p.Identifiant.equals(iddoctor)) {
+                return p;
+            }
+        }
+        return null;
+  }
     
     public static void afficherPatients() {
         if (patients.isEmpty()) {

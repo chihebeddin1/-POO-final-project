@@ -10,7 +10,7 @@ public class doctor extends user {
     boolean surgery;
     private Scanner scanner;
     private Map<String, hourschedule> schedule;  // Map to store the schedule by day
-    private String Identifiant;
+    String Identifiant;
     private String MotDePasse;
     
     // Constructor

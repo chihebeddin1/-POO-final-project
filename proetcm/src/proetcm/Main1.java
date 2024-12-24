@@ -21,7 +21,7 @@ public class Main1 {
 		CabinetMedicale.patients = new ArrayList<>();  secretaire.rdvs= new ArrayList<>(); 
         CabinetMedicale.doctors = new ArrayList<>();
         CabinetMedicale.secretaires = new ArrayList<>();
-        doctor medecin1 = new doctor("Jean", "Martin", 987654321, "20 rue de la Santé", "Cardiologue", false ,"Dr.Martin","Santé55");
+        doctor medecin1 = new doctor("Jean", "Martin", 987654321, "20 rue de la Santé", "Cardiologue", false ,"D","S");
         doctor medecin2 = new doctor("Sophie", "Lemoine", 123789456, "15 rue des Lilas", "Dermatologue", true, "Dr.Lemoine","Santé66");
         doctor medecin3 = new doctor("hamid", "soup", 123784856, "10 rue des Lilas", "Cardiologue", true, "Dr.soup","Santé77");
         doctor medecin4 = new doctor("sarah", "ougour", 123879456, "8 rue des Lilas", "Dentiste", true, "Dr.ougour","Santé22");
@@ -67,7 +67,7 @@ public class Main1 {
         CabinetMedicale.ajouterPatient(patient5);
         
      // Ajout d'une secrétaire
-        secretaire secretaire1 = new secretaire("salah", "meroua", 123456789, "10 rue de la Paix", "meroua","Santé1");
+        secretaire secretaire1 = new secretaire("salah", "meroua", 123456789, "10 rue de la Paix", "m","s");
         secretaire secretaire3 = new secretaire("sherine", "malah", 132456789, "5 rue de la Paix", "malah","Santé2");
         secretaire secretaire4 = new secretaire("imen", "tila", 123456789, "4 rue de la Paix", "tila","Santé3");
         secretaire secretaire5 = new secretaire("omar", "karit", 143256879, "2 rue de la Paix", "karit","Santé4");
@@ -97,10 +97,12 @@ public class Main1 {
         
      // Vérification de l'utilisateur
         boolean p= true;
-        //identifier l'user
-        	    	p= true;
+        int stop = 0;
+       
+    	
                 Scanner scanner = new Scanner(System.in);
                 do {
+                	do {
                 System.out.println("veuillez saisir votre role:");
                 
                 String userrole = scanner.nextLine().toLowerCase();//lower case to work in switch
@@ -109,21 +111,25 @@ public class Main1 {
                 	
                
 					int i=0;
-					do {
+					
                 	System.out.println("Veuillez saisir votre ID:");
                     String userId = scanner.nextLine();
                     System.out.println("Veuillez saisir votre mot de passe:");
                     String userMdp = scanner.nextLine();
                     if (CabinetMedicale.verifierUtilisateur(userId, userMdp)) {
+                    	do {
                         System.out.println("Bienvenue, Docteur! Vous êtes authentifié.");
                         System.out.println("Entre l'ID de votre patient:");
                         String idpatientString=scanner.nextLine();
+                        
                       Patient patient= CabinetMedicale.rechercherPatient(idpatientString);
                         if(patient==null) {
                         	System.out.println("votre patient n'exist pas");
                         	System.out.println("voulez vous l'ajouter?");
                         	String decisionString=scanner.nextLine();
                             if(decisionString.equalsIgnoreCase("yes")) {
+                               
+
                             	System.out.println("entrer le nom de votre pateint:");
                             	  String nom=scanner.nextLine();
                             	  System.out.println("entrer le prenom de votre pateint:");
@@ -151,7 +157,8 @@ public class Main1 {
                             	  
                             	  System.out.println("entrer les allergies votre pateint:");
                             	  String alergie=scanner.nextLine();
-                            	  
+                                  scanner.nextLine();
+
                             	  ArrayList<String> alergieStrings = new ArrayList<>();;
                             	  alergieStrings.add(alergie);
                             	  
@@ -160,12 +167,15 @@ public class Main1 {
                                   patient= CabinetMedicale.rechercherPatient(patient21.idPatient);
                             }
                         }
-                        
-                                  scanner.nextLine();
+                                      p=false;
+                            
                   	              System.out.println("la consultation de "+patient.nom+""+patient.prenom);
+                                  scanner.nextLine();
+
                   	              PatientManagement patientManagement = new PatientManagement();
                                   System.out.println("Entrez l'ordonnance:");
                                   String orString=   patientManagement.writeOrdonnance(patient);
+                             
                                   System.out.println("Ajoutez une observation:");                    
                                   String obString=  patientManagement.addObservation(patient);
                                   System.out.println("Ajoutez un certificat:");                      
@@ -188,10 +198,17 @@ public class Main1 {
                   	              sb.append("\n");
                   	              String result = sb.toString();
                   	              patient.getConsultationhistory().add(result);
-                  	              
+                                 
+                  	             
+
                   	              patient.afficherConsultations(patient);
-                  	             p=false;
-                  	  
+                                  System.out.println("enter 0 if you wanna stop, 1 if u wanna return to the menu?");
+                            	  stop=scanner.nextInt();
+                                  scanner.nextLine();
+
+                                 
+                  	             
+                    	} while(stop!=0&&stop!=1);
                   	  
                   	  
                         //les tahes des docteurs
@@ -200,21 +217,20 @@ public class Main1 {
                        
                         i=i+1;
                     }
-                    }while(i<3&&p==true);
-					if(p==true);
+                    }while(i<3&&stop!=1);
+					if(i>=3) {
 					System.out.print("error");
-					return;
+					}
+                    
+
+					
                 }
                 case "secretaire": {
                     int i=0;
                 	
                 	do {
                 		// les tache des secretaires...
-                		System.out.println("quelle type de tache voulez vous effectuer?\n");
-                        System.out.println("saisir 1 pour ajouter un patient et gerer son rdv ");
-                        System.out.println("saisir 2 pour ajouter un noveau medcin ");
-                        System.out.println("saisir 3 pour ajouter une nouvelle secretaire");
-                        System.out.println("saisir 4 pour change an appointment pr a schedual");
+                	
                        
              
                 	System.out.println("Veuillez saisir votre ID:");
@@ -224,16 +240,19 @@ public class Main1 {
                     if (CabinetMedicale.verifierUtilisateur(userId, userMdp)) {
                         System.out.println("Bienvenue, Secrétaire! Vous êtes authentifié.");
                         
+                        do {
                         
                         
-                            System.out.println("Entre l'ID de votre patient:");
-                            String idpatientString=scanner.nextLine();
-                          Patient patient= CabinetMedicale.rechercherPatient(idpatientString);
-                            if(patient==null) {
-                            	System.out.println("votre patient n'exist pas");
-                            	System.out.println("voulez vous l'ajouter?");
-                            	String decisionString=scanner.nextLine();
-                                if(decisionString.equalsIgnoreCase("yes")) {
+                    	System.out.println("quelle type de tache voulez vous effectuer?\n");
+                        System.out.println("saisir \"one\" pour ajouter un patient et gerer son rdv ");
+                        System.out.println("saisir \"two\" pour ajouter un noveau medcin ");
+                        System.out.println("saisir \"three\" pour ajouter une nouvelle secretaire");
+                        System.out.println("saisir \"four\" pour change an appointment pr a schedual");
+                    	String decisionStrin=scanner.nextLine();
+                    	switch(decisionStrin) {
+                    	case "one":{
+                    		
+                           
                                 	System.out.println("entrer le nom de votre pateint:");
                                 	  String nom=scanner.nextLine();
                                 	  System.out.println("entrer le prenom de votre pateint:");
@@ -241,7 +260,8 @@ public class Main1 {
                                 	  System.out.println("entrer l'adress de votre pateint:");
                                 	  String adress=scanner.nextLine();
                                 	  
-                                	  
+                                	  scanner.nextLine();
+
                                 	  System.out.println("entrer le id de votre pateint:");
                                 	  String id=scanner.nextLine();
                                 	  
@@ -267,28 +287,192 @@ public class Main1 {
                                 	  
                                       Patient patient21= new Patient(nom,prenom,numdetelephon,adress,id,sang,alergieStrings,numdeop);
                                       CabinetMedicale.ajouterPatient(patient21);
-                                      patient= CabinetMedicale.rechercherPatient(patient21.idPatient);
+                                      Patient patien= CabinetMedicale.rechercherPatient(patient21.idPatient);
                                 
                             
                         
                             //gestion des rdv
                             secretaire.manageAppointments(CabinetMedicale.doctors, secretaire.rdvs, CabinetMedicale.patients);//jma3a succes mais ki tbadlo getter nom par prenom
-                                }
-                            }
-                            
+                               
                             
                             
                             
                         p=false;
-                    } else {
+                    		
+                    		
+                    	}
+                    	case "two":{
+                    		System.out.println("entrer le nom de votre nov docteur:");
+                      	  String nom=scanner.nextLine();
+                      	  System.out.println("entrer le prenom de votre nov docteur:");
+                      	  String prenom=scanner.nextLine();
+                      	  System.out.println("entrer l'adress de votre nov docteur:");
+                      	  String adress=scanner.nextLine();
+                      	  
+                      	  scanner.nextLine();
+
+                      	  System.out.println("entrer le id de votre nov docteur:");
+                      	  String id=scanner.nextLine();
+                      	  
+                      	  System.out.println("entrer le numero de telephone de votre nov docteur:");
+                      	  int numdetelephon=scanner.nextInt();
+                      	  scanner.nextLine();
+                      	  
+                      	  System.out.println("entrer  la speciality de votre nov docteur:");
+                      	  String spec=scanner.nextLine();
+                      	  
+                      	  
+                      	  
+                      	  System.out.println("is he surgen");
+                      	  String cho=scanner.nextLine();
+                      	  Boolean surgeryBoolean;
+                      	  if(cho=="yes") {
+                      		  surgeryBoolean=true;
+                      	  }
+                      	  surgeryBoolean=false;
+                      	  scanner.nextLine();
+                      	  
+                      	  System.out.println("entrer le mot de passe de votre noc docteur:");
+                      	  String psw=scanner.nextLine();
+                    		
+                    		doctor doctor=new doctor(nom,prenom,numdetelephon,adress,spec,surgeryBoolean,id,psw);
+                    		CabinetMedicale.ajouterMedecin(doctor);
+                        	 
+                          	  System.out.println("enter the day and the time he will be working in:");
+                          	  
+                          	  System.out.println("enter the day :");
+
+                          	  String day=scanner.nextLine();
+
+                          	  System.out.println("the starting hour :");
+                        	 
+                          	  int startH=scanner.nextInt();
+                          	  
+                          	  System.out.println("the starting min :");
+
+                          	  
+                          	  int startM=scanner.nextInt();
+                          	  System.out.println("the ending hour :");
+
+                          	  int endH=scanner.nextInt();
+                          	  System.out.println("the the ending minut :");
+
+                          	  int endM=scanner.nextInt();
+                          	  doctor.addSchedule(day,startH,startM,endH,endM);
+ 
+                          	 scanner.nextLine();
+                    		
+                    		
+                    		
+                    		
+                    	}
+                    	case "three":{
+                    		
+
+                        	System.out.println("entrer le nom de votre nov secretaire:");
+                        	  String nom=scanner.nextLine();
+                        	  System.out.println("entrer le prenom de votre nov secretaire:");
+                        	  String prenom=scanner.nextLine();
+                        	  System.out.println("entrer l'adress de votre nov secretaire:");
+                        	  String adress=scanner.nextLine();
+                        	  
+                        	  scanner.nextLine();
+
+                        	  System.out.println("entrer le id de votre nov secretaire:");
+                        	  String id=scanner.nextLine();
+                        	  
+                        	  System.out.println("entrer le numero de telephone de votre nov secretaire:");
+                        	  int numdetelephon=scanner.nextInt();
+                        	  scanner.nextLine();
+                        	  
+                        	 
+
+                        	  System.out.println("entrer le password votre nov secretaire:");
+                        	  String psw=scanner.nextLine();
+                        	  secretaire secretaire=new secretaire(nom,prenom,numdetelephon,adress,id,psw);
+                    		  CabinetMedicale.ajouterSecretaire(secretaire);
+                    		
+                    		
+                    		
+                    		
+                    	}
+                    	
+                    	case "four":{
+                      	  System.out.println("voulez vous changer un \"rendez vous\" ou un \"schedule\"");
+                    	  String choi=scanner.nextLine();
+                          switch(choi) {
+                          case"rendez vous":{
+                        	  
+                          	  System.out.println("entrer l'id de votre patient");
+                        	  String idd=scanner.nextLine();
+                        	 Patient patient11= CabinetMedicale.rechercherPatient(idd);
+                             if(patient11==null) {
+                             	  System.out.println("le patient n'exist pas");
+
+                             }else {
+                            	 
+                            	 secretaire.manageAppointments(CabinetMedicale.doctors, secretaire.rdvs, CabinetMedicale.patients);
+                            	 
+                             }
+                        	  
+                        	  
+                          }
+                          case "schedule":{
+                          	  System.out.println("entrer l'id de votre medcin");
+                        	  String idd=scanner.nextLine();
+                        	  doctor doctor=CabinetMedicale.rechercherdoctor(idd);
+                        	  scanner.nextLine();
+                        	  if(doctor==null) {
+                             	  System.out.println("le patient n'exist pas");
+
+                             }else {
+                             	  System.out.println("voulez vous \"suprimer schedule\" ou \"updated\"");
+                            	  String choii=scanner.nextLine();
+                            	  scanner.nextLine();
+                            	  switch(choii) {
+                            	  case "suprimer schedule":{
+                            		  
+                            		  doctor.removeSchedule();
+                            		  
+                            		  }
+                            	  case "updated":{
+                            		  
+                            		  
+                            		  doctor.updateSchedule();
+                            		  
+                            	  }
+                            	  
+                            	  default:{
+                                 	  System.out.println("you made a mistake");
+                                 	 scanner.nextLine();
+
+                            		  
+                            	  }
+                            	  
+                            	  }
+
+                             }
+                        	  
+                          }
+                          
+                          
+                          }
+                    		
+                    		
+                    	}
+
+                    	}
+                        
+                        }while(true);
+                        } else {
                         System.out.println("Authentification échouée. Vérifiez vos informations.");
                         
                         i++;
                     }
                     }while(i<3&&p==true);
-                	if(p==true);
+                	if(p==false);
                 	System.out.print("error");
-					return;
+					
                 }
                 
                 default: {
@@ -300,7 +484,7 @@ public class Main1 {
                 
                         }
                
-                }while(p==true);
+                }while(true);
                 	
                 
                 }
