@@ -3,6 +3,11 @@ import java.util.Scanner;
 import java.util.Map;
 import java.util.HashMap;
 
+
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+
 public class doctor extends user {
     String specialty;
     boolean surgery;
@@ -39,10 +44,9 @@ public class doctor extends user {
 	}
 
 	// Add or update the schedule for a specific day
-    public void addSchedule() {
+	public void addSchedule( String day, int startHour, int startMin,int endHour,int endMin) {
         // Read day and start/end times as strings first
-        System.out.print("Enter the day of the week (e.g., Monday, Tuesday, etc.): ");
-        String day = scanner.nextLine();
+        
 
         if (this.schedule.containsKey(day)) {
             // If the schedule exists, prompt for confirmation to update it
@@ -53,13 +57,12 @@ public class doctor extends user {
                 
                 // Instead of nextInt(), we use nextLine() to handle input cleanly
                 boolean sh=true;
-                int startHour,startMin, endHour, endMin;
+                if(startHour<0 || startHour>23 || startMin<0 || startMin>59 || endHour<0 || endHour>23 || endMin<0 || endMin>59) {
+
                 
                 do {
                  startHour = Integer.parseInt(scanner.nextLine()); // Convert the string input taken by nextline() to int for starthour
-                
-                
-                System.out.print("Enter the new start min: ");
+                 System.out.print("Enter the new start min: ");
 
                  startMin = Integer.parseInt(scanner.nextLine()); 
                 System.out.print("Enter the new end hour: ");
@@ -69,28 +72,18 @@ public class doctor extends user {
                  endMin = Integer.parseInt(scanner.nextLine()); // Convert input to int
                 if(startHour<0 || startHour>23 || startMin<0 || startMin>59 || endHour<0 || endHour>23 || endMin<0 || endMin>59) {
                     sh=false; };
-                }while(sh=false);
-
+                }while(sh==false);
+                }
                 this.schedule.put(day, new hourschedule(startHour,startMin, endHour, endMin));
                 System.out.println("Schedule for " + day + " updated: " + startHour + "H" + startMin+ "min" + "to" + endHour + "H" + endMin + "min");
                 }
         } else {
             // If the schedule doesn't exist, add it
-            System.out.print("Enter the start hour: ");
-            int startHour = Integer.parseInt(scanner.nextLine()); // Convert input to int
-            System.out.print("Enter the new start min: ");
-
-            int startMin = Integer.parseInt(scanner.nextLine());
-            System.out.print("Enter the end hour: ");
-            int endHour = Integer.parseInt(scanner.nextLine()); // Convert input to int
-            System.out.print("Enter the new end min: ");
-
-            int endMin = Integer.parseInt(scanner.nextLine()); 
+            
             this.schedule.put(day, new hourschedule(startHour,startMin, endHour, endMin));
             System.out.println("Schedule for " + day + " updated: " + startHour + "H" + startMin+ "min" + "to" + endHour + "H" + endMin + "min");
         }
     }
-
     public void updateSchedule() {
         // Method for updating an existing schedule
         System.out.print("Enter the day of the week (e.g., Monday, Tuesday, etc.): ");
@@ -105,19 +98,17 @@ public class doctor extends user {
                 boolean sh=true;
                 int startHour,startMin, endHour, endMin;
                 do {
-                 startHour = (scanner.nextInt());
-                System.out.print("Enter the new start min: ");
-
-                 startMin = Integer.parseInt(scanner.nextLine());  
-
-                System.out.print("Enter the new end hour: ");
-                 endHour = (scanner.nextInt());
-                System.out.print("Enter the new end min: ");
-
-                 endMin = Integer.parseInt(scanner.nextLine()); // Convert input to int
-                 if(startHour<0 || startHour>23 || startMin<0 || startMin>59 || endHour<0 || endHour>23 || endMin<0 || endMin>59) {
-                     sh=false; };
-                 }while(sh=false);
+                    startHour = Integer.parseInt(scanner.nextLine()); 
+                    System.out.print("Enter the new start min: ");
+                    startMin = Integer.parseInt(scanner.nextLine());
+                    System.out.print("Enter the new end hour: ");
+                    endHour = Integer.parseInt(scanner.nextLine());
+                    System.out.print("Enter the new end min: ");
+                    endMin = Integer.parseInt(scanner.nextLine());
+                    if (startHour < 0 || startHour > 23 || startMin < 0 || startMin > 59 || endHour < 0 || endHour > 23 || endMin < 0 || endMin > 59) {
+                        sh = false;
+                    }
+                } while (sh == false);
 
 
                 // Update the schedule for the day
@@ -196,4 +187,9 @@ public class doctor extends user {
             scanner.close();
         }
     }
+
+	public void addSchedule(String string, hourschedule hourschedule) {
+		// TODO Auto-generated method stub
+		
+	}
 }

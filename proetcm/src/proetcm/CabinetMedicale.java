@@ -5,6 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 
 
+
+
+
+import java.util.Map.Entry;
+
+
 public class CabinetMedicale {
     static List <Patient> patients;
     static List<doctor> doctors;
@@ -27,9 +33,11 @@ public class CabinetMedicale {
           }
           // Ajoute le patient s'il est unique
           patients.add(patient);
-          System.out.println("Patient " + patient.getNom() + " ajouté avec succès !");
+          System.out.println("Patient " + patient.getNom() + patient.getPrenom()+ " ajouté avec succès !");
           return true;
     }
+    
+    
     public static Patient rechercherPatient(String idPatient) {
         for (Patient p : patients) {
             if (p.idPatient.equals(idPatient)) {
@@ -46,7 +54,7 @@ public class CabinetMedicale {
         } else {
             System.out.println("Liste des patients :");
             for (Patient patient : patients) {
-                System.out.println(patient.getNom() + " " + patient.getPrenom());
+                System.out.println( patient.getNom() + patient.getPrenom());
             }
         }
     }
@@ -55,28 +63,45 @@ public class CabinetMedicale {
     //gestion médcin 
     
     public static void ajouterMedecin(doctor medecin) {
+        // Ensure the doctors list is initialized
         if (CabinetMedicale.doctors == null) {
             CabinetMedicale.doctors = new ArrayList<>();
         }
-        for (doctor d : doctors) {
+
+        // Iterate through the doctors list from CabinetMedicale
+        for (doctor d : CabinetMedicale.doctors) {
+            // Check if a doctor with the same Identifiant already exists
             if (d.getIdentifiant().equals(medecin.getIdentifiant())) {
                 System.out.println("Un médecin avec cet identifiant existe déjà : " + medecin.getIdentifiant());
                 return;
             }
         }
-        doctors.add(medecin);
-        System.out.println("Médecin ajouté avec succès : " + medecin.getNom() + " " + medecin.getPrenom());
+
+        // Add the new doctor to the list
+        CabinetMedicale.doctors.add(medecin);
+        // Printing details of the added doctor
+        System.out.println("Médecin ajouté avec succès : "  + " " + medecin.getNom() + " " + medecin.getPrenom());
+        
+        // Print the schedule in a readable format
+        if (medecin.getSchedule().isEmpty()) {
+            System.out.println("Pas de planning disponible.");
+        } else {
+            System.out.println("Planning du médecin :");
+            for (Entry<String, hourschedule> entry : medecin.getSchedule().entrySet()) {
+                System.out.println("Jour : " + entry.getKey() + " | Heures : " + entry.getValue());
+            }
+        }
     }
     
  // Afficher les médecins
     public static void afficherMedecins() {
-        if (doctors.isEmpty()) {
+        if (CabinetMedicale.doctors == null || CabinetMedicale.doctors.isEmpty()) {
             System.out.println("Aucun médecin enregistré.");
             return;
         }
         System.out.println("Liste des médecins :");
-        for (doctor medecin : doctors) {
-            System.out.println(medecin);
+        for (doctor medecin : CabinetMedicale.doctors) {
+            System.out.println(medecin);  // This will call the toString() method of doctor class
         }
     }
     
@@ -95,7 +120,7 @@ public class CabinetMedicale {
         }
 
         secretaires.add(secretaire);
-        System.out.println("Secrétaire ajoutée avec succès : " + secretaire.getNom() + " " + secretaire.getPrenom());
+        System.out.println("Secrétaire ajoutée avec succès :"  + secretaire.getNom() + " " +  secretaire.getPrenom());
     }
 
 
